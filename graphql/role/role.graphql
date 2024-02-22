@@ -1,0 +1,10 @@
+extend type Query @guard {
+    roles: [Role!]! @paginate(defaultCount: 10)
+}
+
+type Role {
+  id: ID!
+  name: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+}

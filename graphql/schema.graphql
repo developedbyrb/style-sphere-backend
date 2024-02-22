@@ -1,0 +1,3 @@
+#import authentication/*.graphql
+#import user/*.graphql
+#import role/*.graphql

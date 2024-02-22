@@ -1,0 +1,17 @@
+extend type Query {
+    me: User @auth
+}
+
+type AccessToken {
+  token: String!
+  user: User
+}
+
+input LoginInput {
+  email: String! @rules(apply: ["email"])
+  password: String!
+}
+
+extend type Mutation {
+  login(input: LoginInput @spread): AccessToken! @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@login")
+}

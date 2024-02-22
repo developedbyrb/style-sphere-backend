@@ -1,0 +1,41 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+scalar Upload @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
+
+extend type Query @guard {
+    user(
+      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
+    ): User @find
+
+    users(
+        name: String @where(operator: "like")
+        id: ID @orderBy(column: "id", order: DESC)
+    ): [User!]! @paginate(defaultCount: 5)
+
+    getFilePath(path: String!): String!
+}
+
+extend type Mutation {
+    createUser(input: UserInput @spread): User! @field(resolver: "App\\GraphQL\\Mutations\\CreateUser")
+    deleteUser(id: ID! @whereKey): User @delete
+}
+
+input UserInput {
+    name: String! @trim
+    email: String! @rules(apply: ["email"])
+    password: String! @hash @rules(apply: ["min:6"])
+    role_id: ID!
+    profile_pic: Upload
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    email_verified_at: DateTime
+    created_at: DateTime!
+    updated_at: DateTime!
+    role: Role! @belongsTo
+    user_profile: String
+}
