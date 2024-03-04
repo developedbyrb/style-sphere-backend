@@ -3,15 +3,38 @@ extend type Query {
 }
 
 type AccessToken {
-  token: String!
-  user: User
+    token: String!
+    user: User
 }
 
 input LoginInput {
-  email: String! @rules(apply: ["email"])
-  password: String!
+    email: String! @rules(apply: ["email"])
+    password: String!
+}
+
+input UserRegisterInput {
+    name: String! @rules(apply: ["min:3", "max:50"])
+    email: String! @rules(apply: ["max:80", "email", "unique:users,email"])
+    role_id: ID!
+    password: String! @rules(apply: ["min:5", "confirmed"])
+    password_confirmation: String!
+}
+
+interface Message {
+    message: String!
+}
+type Success implements Message {
+    message: String!
+}
+
+type Error implements Message {
+    message: String!
 }
 
 extend type Mutation {
-  login(input: LoginInput @spread): AccessToken! @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@login")
+    login(input: LoginInput @spread): AccessToken!
+        @field(resolver: "App\\GraphQL\\Mutations\\AuthMutation@login")
+
+    register(input: UserRegisterInput @spread): Message!
+        @create(model: "App\\Models\\User")
 }

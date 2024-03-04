@@ -6,5 +6,5 @@ return [
         'shop_owner' => 'Shop Owner',
         'customer' => 'Customer',
         'producer' => 'Producer'
-    ]
+    ],
 ];

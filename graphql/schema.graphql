@@ -1,3 +1,5 @@
 #import authentication/*.graphql
 #import user/*.graphql
 #import role/*.graphql
+#import product/*.graphql
+#import category/*.graphql

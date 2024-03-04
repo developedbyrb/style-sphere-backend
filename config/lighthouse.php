@@ -44,6 +44,9 @@ return [
             // Logs every incoming GraphQL query.
             // Nuwave\Lighthouse\Http\Middleware\LogGraphQLQueries::class,
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+
+            // Define gates dynamically
+            \App\Http\Middleware\GateDefineMiddleware::class,
         ],
 
         /*

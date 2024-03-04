@@ -14,7 +14,7 @@ class RolesSeeder extends Seeder
     public function run(): void
     {
         $appRoles = config('constants.APP_ROLES');
-        foreach ($appRoles as $key => $value) {
+        foreach ($appRoles as $value) {
             Role::create([
                 'name' => $value
             ]);

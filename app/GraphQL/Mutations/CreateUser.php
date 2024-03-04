@@ -8,23 +8,25 @@ use App\Models\User;
 
 final readonly class CreateUser
 {
-    /** @param  array{}  $args */
-    public function __invoke(null $_, array $args)
+    /**
+     * @param  array{}  $args
+     */
+    public function __invoke(array $args)
     {
-        /** @var \Illuminate\Http\UploadedFile $file */
+        /**
+         * @var \Illuminate\Http\UploadedFile $file
+         */
         $file = $args['profile_pic'];
 
         // Store the file in the 'uploads' directory and return the path
-        $path = $file->storePublicly('uploads');
+        $path = $file->storePublicly('public/uploads');
 
-        $user = User::create([
+        return User::create([
             'name' => $args['name'],
             'email' => $args['email'],
             'password' => bcrypt($args['password']),
             'role_id' => $args['role_id'],
             'profile_pic' => $path
         ]);
-
-        return $user;
     }
 }

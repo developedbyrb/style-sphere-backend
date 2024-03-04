@@ -1,0 +1,21 @@
+extend type Query {
+    products(id: ID @orderBy(column: "id", order: DESC)): [Product!]!
+        @paginate(defaultCount: 5)
+}
+
+type Product {
+    id: ID!
+    name: String!
+    code: String!
+    category_id: Category!
+    description: String!
+    tags: String!
+    purchase_price: String!
+    selling_price: String!
+    created_by: User!
+    status: String!
+    is_in_stock: String!
+    current_stock_qty: String!
+    low_stock_alert_qty: String!
+    is_in_low_stock: String!
+}

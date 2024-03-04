@@ -1,0 +1,27 @@
+extend type Query @guard {
+    categories(id: ID @orderBy(column: "id", order: DESC)): [Category!]!
+        @paginate(defaultCount: 5)
+}
+
+extend type Mutation @guard {
+    createCategory(input: CategoryInput @spread): Category!
+}
+
+input CategoryInput {
+    name: String! @trim
+    code: String! @trim
+    price_start_from: Float!
+    price_end_to: Float!
+    status: String!
+    image: Upload
+}
+
+type Category {
+    id: ID!
+    name: String!
+    code: String!
+    image: String!
+    price_start_from: String!
+    price_end_to: String!
+    status: String!
+}

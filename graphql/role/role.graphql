@@ -3,8 +3,9 @@ extend type Query @guard {
 }
 
 type Role {
-  id: ID!
-  name: String!
-  created_at: DateTime!
-  updated_at: DateTime!
+    id: ID!
+    name: String!
+    userCount: Int! @count(relation: "users")
+    created_at: DateTime!
+    updated_at: DateTime!
 }
