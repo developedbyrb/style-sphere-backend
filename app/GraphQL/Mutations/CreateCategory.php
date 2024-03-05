@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\GraphQL\Mutations;
 
 use App\Models\Category;

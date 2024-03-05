@@ -1,10 +1,14 @@
 extend type Query @guard {
     categories(id: ID @orderBy(column: "id", order: DESC)): [Category!]!
         @paginate(defaultCount: 5)
+
+    category(id: ID! @eq): Category! @find
 }
 
 extend type Mutation @guard {
     createCategory(input: CategoryInput @spread): Category!
+    updateCategory(id: ID!, input: UpdateCategoryInput @spread): Category!
+    deleteCategory(id: ID! @whereKey): Category @delete
 }
 
 input CategoryInput {
@@ -16,6 +20,15 @@ input CategoryInput {
     image: Upload
 }
 
+input UpdateCategoryInput {
+    name: String @trim
+    code: String @trim
+    price_start_from: Float
+    price_end_to: Float
+    status: String
+    image: Upload
+}
+
 type Category {
     id: ID!
     name: String!
@@ -24,4 +37,5 @@ type Category {
     price_start_from: String!
     price_end_to: String!
     status: String!
+    imageUrl: String!
 }
