@@ -20,17 +20,27 @@ extend type Query @guard {
     getFilePath(path: String!): String!
 }
 
-extend type Mutation {
-    createUser(input: UserInput @spread): User!
+extend type Mutation @guard {
+    createUser(input: CreateUserInput @spread): User!
         @field(resolver: "App\\GraphQL\\Mutations\\CreateUser")
+
+    updateUser(id: ID!, input: UpdateUserInput @spread): User!
     deleteUser(id: ID! @whereKey): User @delete
 }
 
-input UserInput {
+input CreateUserInput {
     name: String! @trim
     email: String! @rules(apply: ["email"])
     password: String! @hash @rules(apply: ["min:6"])
     role_id: ID!
+    profile_pic: Upload
+}
+
+input UpdateUserInput {
+    name: String @trim
+    email: String @rules(apply: ["email"])
+    password: String @hash @rules(apply: ["min:6"])
+    role_id: ID
     profile_pic: Upload
 }
 

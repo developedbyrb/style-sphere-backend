@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('shop_id')->constrained();
             $table->string('address_line_1');
-            $table->string('landmark');
+            $table->string('address_line_2')->nullable();
             $table->foreignId('city_id')->constrained();
             $table->foreignId('state_id')->constrained();
             $table->foreignId('country_id')->constrained();

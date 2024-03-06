@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('shop_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->string('selling_price');
-            $table->int('available_qty');
+            $table->integer('available_qty');
             $table->timestamps();
         });
     }

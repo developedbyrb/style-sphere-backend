@@ -19,7 +19,7 @@ final readonly class CreateUser
         $file = $args['profile_pic'];
 
         // Store the file in the 'uploads' directory and return the path
-        $path = $file->storePublicly('public/uploads');
+        $path = $file->storePublicly('public/uploads/users');
 
         return User::create([
             'name' => $args['name'],

@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->mediumText('details');
+            $table->string('name')->unique();
+            $table->string('email')->unique();
+            $table->string('website')->nullable();
+            $table->string('mobile_number');
             $table->longText('description')->nullable();
             $table->string('image')->nullable();
             $table->enum('status', ['active', 'inactive']);

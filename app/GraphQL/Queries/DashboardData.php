@@ -19,7 +19,7 @@ class DashboardData
         try {
             $usersCount = User::whereNotNull('email_verified_at')->count();
             $productsCount = Product::count();
-            $shopsCount = 0;
+            $shopsCount = Shop::count();
             $categoriesCount = Category::count();
 
             return [
