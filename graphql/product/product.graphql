@@ -1,21 +1,55 @@
-extend type Query {
+extend type Query @guard {
     products(id: ID @orderBy(column: "id", order: DESC)): [Product!]!
         @paginate(defaultCount: 5)
+
+    product(id: ID! @eq): Product! @find
+}
+
+extend type Mutation @guard {
+    createProduct(input: CreateProductInput @spread): Product!
+    updateProduct(id: ID!, input: UpdateProductInput @spread): Product!
+    deleteProduct(id: ID! @whereKey): Product @delete
+}
+
+input CreateProductInput {
+    name: String! @trim
+    code: String! @trim
+    category_id: ID!
+    description: String! @trim
+    tags: String! @trim
+    purchase_price: Float!
+    selling_price: Float!
+    status: String!
+    current_stock_qty: Int!
+    low_stock_alert_qty: Int!
+}
+
+input UpdateProductInput {
+    name: String @trim
+    code: String @trim
+    category_id: ID
+    description: String @trim
+    tags: String @trim
+    purchase_price: Float
+    selling_price: Float
+    status: String
+    current_stock_qty: Int
+    low_stock_alert_qty: Int
 }
 
 type Product {
     id: ID!
     name: String!
     code: String!
-    category_id: Category!
+    category_id: ID!
     description: String!
     tags: String!
-    purchase_price: String!
-    selling_price: String!
+    purchase_price: Float!
+    selling_price: Float!
     created_by: User!
     status: String!
     is_in_stock: String!
-    current_stock_qty: String!
-    low_stock_alert_qty: String!
-    is_in_low_stock: String!
+    current_stock_qty: Int!
+    low_stock_alert_qty: Int!
+    is_in_low_stock: Int!
 }

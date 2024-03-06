@@ -3,3 +3,14 @@
 #import role/*.graphql
 #import product/*.graphql
 #import category/*.graphql
+
+type Query {
+    dashboardData: DashboardAnalytics! @guard
+}
+
+type DashboardAnalytics {
+    usersCount: Int!
+    categoriesCount: Int!
+    productsCount: Int!
+    shopsCount: Int!
+}
