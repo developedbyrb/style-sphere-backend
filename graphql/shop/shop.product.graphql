@@ -1,0 +1,12 @@
+input CreateShopProduct {
+    productId: ID!
+    stock: Integer!
+    price: Float!
+}
+
+type ShopProduct {
+    id: ID!
+    product: Product!
+    stock: Integer!
+    price: Float!
+}

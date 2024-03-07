@@ -1,0 +1,39 @@
+extend type Query @guard {
+    shops(id: ID @orderBy(column: "id", order: DESC)): [Shop!]!
+        @paginate(defaultCount: 5)
+
+    shop(id: ID! @eq): Shop! @find
+}
+
+extend type mutation @guard {
+    createShop(input: CreateShop @spread): Shop!
+
+    removeShop(id: ID! @whereLike): Shop @delete
+}
+
+input CreateShop {
+    generalDetails: CreateGeneralDetails
+    addressDetails: [CreateShopAddress!]!
+    productDetails: [CreateShopProduct!]!
+}
+
+input CreateGeneralDetails {
+    name: String!
+    description: String
+    website: String
+    mobile: String!
+    email: String!
+    image: String!
+}
+
+type Shop {
+    id: ID!
+    name: String!
+    description: String
+    website: String
+    mobile: String!
+    email: String!
+    image: String!
+    status: String!
+    createdBy: User
+}

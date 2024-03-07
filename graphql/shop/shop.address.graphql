@@ -1,0 +1,18 @@
+input CreateShopAddress {
+    lineNo1: String!
+    lineNo2: String
+    cityId: City!
+    pincode: String!
+    stateId: State!
+    countryId: Country!
+}
+
+type ShopAddress {
+    id: ID!
+    lineNo1: String!
+    lineNo2: String
+    city: City!
+    pincode: String!
+    state: State!
+    country: Country!
+}
