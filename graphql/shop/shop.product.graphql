@@ -1,12 +1,12 @@
 input CreateShopProduct {
-    productId: ID!
-    stock: Integer!
-    price: Float!
+    product: ID!
+    stock: String!
+    price: String!
 }
 
 type ShopProduct {
     id: ID!
     product: Product!
-    stock: Integer!
+    stock: String!
     price: Float!
 }

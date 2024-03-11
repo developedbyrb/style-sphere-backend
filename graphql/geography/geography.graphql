@@ -1,3 +1,15 @@
+extend type Query {
+    countries: [Country!]! @all
+    stateByCountryId(countryId: String!): [State!]
+        @field(
+            resolver: "App\\GraphQL\\Queries\\GeoConfigQueries@stateByCountryId"
+        )
+    citiesByStateId(stateId: String!): [City!]
+        @field(
+            resolver: "App\\GraphQL\\Queries\\GeoConfigQueries@citiesByStateId"
+        )
+}
+
 type City {
     id: ID!
     name: String!
@@ -7,11 +19,23 @@ type City {
 type State {
     id: ID!
     name: String!
-    country: Country
+    country: Country! @belongsTo
 }
 
 type Country {
     id: ID!
     name: String!
-    code: String!
+}
+
+input CountryFilterInput {
+    country: StringQueryOperatorInput
+}
+
+input StringQueryOperatorInput {
+    eq: String
+    ne: String
+    in: [String]
+    nin: [String]
+    regex: String
+    glob: String
 }

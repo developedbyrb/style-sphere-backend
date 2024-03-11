@@ -1,8 +1,12 @@
+scalar JSON @scalar(class: "MLL\\GraphQLScalars\\JSON")
+
 #import authentication/*.graphql
 #import user/*.graphql
 #import role/*.graphql
 #import product/*.graphql
 #import category/*.graphql
+#import geography/*.graphql
+#import shop/*.graphql
 
 type Query {
     dashboardData: DashboardAnalytics! @guard
@@ -13,4 +17,31 @@ type DashboardAnalytics {
     categoriesCount: Int!
     productsCount: Int!
     shopsCount: Int!
+}
+
+interface ApiResponse {
+    success: Boolean!
+    message: String
+    status: Int!
+    data: JSON
+}
+
+type SuccessResponse implements ApiResponse {
+    success: Boolean!
+    message: String
+    status: Int!
+    data: JSON
+}
+
+type ErrorResponse implements ApiResponse {
+    success: Boolean!
+    message: String!
+    data: JSON
+    status: Int!
+    errors: [ErrorType!]!
+}
+
+type ErrorType {
+    code: String!
+    message: String!
 }

@@ -5,14 +5,13 @@ extend type Query @guard {
     shop(id: ID! @eq): Shop! @find
 }
 
-extend type mutation @guard {
+extend type Mutation @guard {
     createShop(input: CreateShop @spread): Shop!
-
-    removeShop(id: ID! @whereLike): Shop @delete
+        @field(resolver: "App\\GraphQL\\Mutations\\ShopResolver@create")
 }
 
 input CreateShop {
-    generalDetails: CreateGeneralDetails
+    generalDetails: CreateGeneralDetails!
     addressDetails: [CreateShopAddress!]!
     productDetails: [CreateShopProduct!]!
 }
@@ -21,9 +20,9 @@ input CreateGeneralDetails {
     name: String!
     description: String
     website: String
-    mobile: String!
+    number: String!
     email: String!
-    image: String!
+    image: String
 }
 
 type Shop {
@@ -31,9 +30,11 @@ type Shop {
     name: String!
     description: String
     website: String
-    mobile: String!
+    mobile_number: String!
     email: String!
     image: String!
     status: String!
     createdBy: User
+    productCount: Int! @count(relation: "products")
+    products: [Product!]! @hasMany
 }

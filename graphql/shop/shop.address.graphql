@@ -1,16 +1,16 @@
 input CreateShopAddress {
-    lineNo1: String!
-    lineNo2: String
-    cityId: City!
+    address_1: String!
+    address_2: String
+    city: String!
     pincode: String!
-    stateId: State!
-    countryId: Country!
+    state: String!
+    country: String!
 }
 
 type ShopAddress {
     id: ID!
-    lineNo1: String!
-    lineNo2: String
+    address_1: String!
+    address_2: String
     city: City!
     pincode: String!
     state: State!
