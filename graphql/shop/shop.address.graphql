@@ -9,10 +9,10 @@ input CreateShopAddress {
 
 type ShopAddress {
     id: ID!
-    address_1: String!
-    address_2: String
-    city: City!
+    address_line_1: String!
+    address_line_2: String
     pincode: String!
-    state: State!
-    country: Country!
+    city: City! @belongsTo
+    state: State! @belongsTo
+    country: Country! @belongsTo
 }

@@ -1,8 +1,9 @@
-extend type Query @guard {
+extend type Query {
     shops(id: ID @orderBy(column: "id", order: DESC)): [Shop!]!
         @paginate(defaultCount: 5)
 
-    shop(id: ID! @eq): Shop! @find
+    shopDetails(id: ID!): Shop!
+        @field(resolver: "App\\GraphQL\\Queries\\ShopResolver@getDetails")
 }
 
 extend type Mutation @guard {
@@ -36,5 +37,6 @@ type Shop {
     status: String!
     createdBy: User
     productCount: Int! @count(relation: "products")
-    products: [Product!]! @hasMany
+    products: [ShopProduct!]! @hasMany
+    addresses: [ShopAddress!]! @hasMany
 }
