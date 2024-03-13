@@ -52,4 +52,5 @@ type Product {
     current_stock_qty: Int!
     low_stock_alert_qty: Int!
     is_in_low_stock: Int!
+    shopProduct: ShopProduct! @hasOne
 }

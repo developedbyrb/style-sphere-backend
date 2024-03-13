@@ -23,4 +23,9 @@ class ShopProduct extends Model
     {
         return $this->hasOne(Product::class, 'id', 'product_id');
     }
+
+    public function shop(): BelongsTo
+    {
+        return $this->belongsTo(Shop::class);
+    }
 }

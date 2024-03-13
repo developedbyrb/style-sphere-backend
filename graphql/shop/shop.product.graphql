@@ -7,6 +7,7 @@ input CreateShopProduct {
 type ShopProduct {
     id: ID!
     product: Product! @hasOne
+    shop: Shop! @belongsTo
     available_qty: String!
     selling_price: Float!
 }

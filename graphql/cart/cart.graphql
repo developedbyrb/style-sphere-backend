@@ -1,0 +1,42 @@
+extend type Query @guard {
+    getCartCount: CartCount!
+        @field(resolver: "App\\GraphQL\\Queries\\CartResolver@getCartCount")
+    cartItems: [Cart!]!
+        @field(resolver: "App\\GraphQL\\Queries\\CartResolver@cartItems")
+}
+
+extend type Mutation @guard {
+    addToCart(input: AddToCartInput! @spread): CartCount!
+        @field(resolver: "App\\GraphQL\\Mutations\\CartResolver@create")
+
+    updateCartItems(id: ID!, input: UpdateCartItems! @spread): CartCount!
+        @field(resolver: "App\\GraphQL\\Mutations\\CartResolver@update")
+
+    removeCartItem(id: ID!): CartCount!
+        @field(resolver: "App\\GraphQL\\Mutations\\CartResolver@remove")
+}
+
+input UpdateCartItems {
+    qty: Int!
+}
+
+input AddToCartInput {
+    product: ID!
+    shop: ID!
+    qty: String!
+    price: String!
+}
+
+type CartCount {
+    cartCount: Int!
+}
+
+type Cart {
+    id: ID!
+    qty: Int!
+    price: String!
+    total_amount: String!
+    user: User! @belongsTo
+    product: Product @belongsTo
+    shop: Shop @belongsTo
+}

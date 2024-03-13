@@ -7,6 +7,7 @@ scalar JSON @scalar(class: "MLL\\GraphQLScalars\\JSON")
 #import category/*.graphql
 #import geography/*.graphql
 #import shop/*.graphql
+#import cart/*.graphql
 
 type Query {
     dashboardData: DashboardAnalytics! @guard
