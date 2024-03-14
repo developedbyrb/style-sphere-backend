@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('is_cancel')->default(false);
             $table->string('cancel_reason')->nullable();
             $table->enum('cancel_by', ['admin', 'vendor', 'customer'])->nullable();
-            $table->enum('payment_status', ['done', 'pending']);
+            $table->enum('payment_status', ['completed', 'pending', 'failed']);
             $table->enum('status', ['placement', 'processing', 'shipping', 'delivered', 'return']);
             $table->timestamps();
         });

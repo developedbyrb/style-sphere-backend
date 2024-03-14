@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('order_number');
             $table->string('amount');
             $table->string('payment_method');
-            $table->string('status');
+            $table->enum('status', ['completed', 'pending', 'failed']);
             $table->timestamps();
         });
     }
